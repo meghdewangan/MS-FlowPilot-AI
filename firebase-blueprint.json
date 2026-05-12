@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "Meeting": {
+      "title": "Meeting",
+      "description": "A meeting with an associated transcript and AI-generated summary",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "transcript": { "type": "string" },
+        "summary": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "processing", "completed", "failed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "ownerId", "transcript", "status", "createdAt"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "An extracted task from a meeting",
+      "type": "object",
+      "properties": {
+        "meetingId": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "title": { "type": "string" },
+        "assignee": { "type": "string" },
+        "deadline": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Critical"] },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["meetingId", "ownerId", "title", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Users collection"
+    },
+    "/meetings/{meetingId}": {
+      "schema": { "$ref": "#/entities/Meeting" },
+      "description": "Meetings and transcripts"
+    },
+    "/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/Task" },
+      "description": "Extracted action items"
+    }
+  }
+}
