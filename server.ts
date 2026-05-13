@@ -23,7 +23,7 @@ async function startServer() {
       const { transcript } = req.body;
       const ai = getAI();
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-3-flash-preview',
         contents: `Please summarize the following meeting transcript. Provide concise summary, key discussion points, decisions, blockers, and deadlines:\n\n${transcript}`,
         config: {
           systemInstruction: 'You are an advanced AI assistant tailored for corporate teams. Summarize the meeting content in a professional, structured fashion.',
@@ -54,7 +54,7 @@ async function startServer() {
       const { transcript } = req.body;
       const ai = getAI();
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-3-flash-preview',
         contents: `Extract action items from the following meeting transcript:\n\n${transcript}`,
         config: {
           systemInstruction: 'You extract actionable tasks from transcripts. Return them as structured data.',
@@ -88,7 +88,7 @@ async function startServer() {
       const { tasksChunk } = req.body;
       const ai = getAI();
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-3-flash-preview',
         contents: `Analyze these tasks and order them from most critical to least critical. Consider deadlines and impact:\n\n${tasksChunk}`,
         config: {
           responseMimeType: 'application/json',
@@ -119,7 +119,7 @@ async function startServer() {
       const { query, pastContext } = req.body;
       const ai = getAI();
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-3-flash-preview',
         contents: `Based on the following meeting summaries and tasks context:\n${pastContext}\n\nAnswer this user query: ${query}`,
         config: {
           systemInstruction: 'You are FlowPilot AI, a team operating system. Be helpful, concise, and refer strictly to the given context.'
@@ -138,7 +138,7 @@ async function startServer() {
       const { base64Data, mimeType } = req.body;
       const ai = getAI();
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-3-flash-preview',
         contents: [
           {
              role: 'user',
@@ -162,7 +162,7 @@ async function startServer() {
       const { userData } = req.body;
       const ai = getAI();
       const response = await ai.models.generateContent({
-        model: 'gemini-3.1-pro-preview',
+        model: 'gemini-3-flash-preview',
         contents: `Generate a daily standup update based on the following task data for the user:\n\n${userData}`,
         config: {
           responseMimeType: 'application/json',
