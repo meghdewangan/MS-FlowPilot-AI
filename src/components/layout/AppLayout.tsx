@@ -25,7 +25,7 @@ export function AppLayout() {
         return;
       }
       console.error('Error signing in: ', error);
-      alert('Error signing in. Please try again.');
+      alert(`Error signing in: ${error.message || error.code || 'Please try again.'}`);
     }
   };
 

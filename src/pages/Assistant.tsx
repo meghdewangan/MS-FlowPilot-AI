@@ -54,9 +54,9 @@ export function Assistant() {
       const answer = await chatAboutMeetings(userMsg, pastContext);
       
       setMessages(prev => [...prev, { role: "assistant", text: answer || "I couldn't find an answer." }]);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setMessages(prev => [...prev, { role: "assistant", text: "Oops, an error occurred while connecting to my brain." }]);
+      setMessages(prev => [...prev, { role: "assistant", text: `Oops, an error occurred: ${err.message}. If you deployed this app to Netlify, keep in mind Netlify only hosts the frontend by default, so the backend API is missing!` }]);
     } finally {
       setLoading(false);
     }
