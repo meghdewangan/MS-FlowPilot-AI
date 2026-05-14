@@ -12,25 +12,54 @@ FlowPilot AI is designed with a modern React frontend and a flexible API archite
 
 ### High-Level Design (System Architecture)
 ```mermaid
-graph TD
-    User(["User"]) -->|"Interacts with"| UI["React Frontend (Vite + Tailwind)"]
-    
-    subgraph Frontend Layer
-        UI
+graph TB
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef user fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    classDef frontend fill:#e8f5e9,stroke:#388e3c,stroke-width:2px;
+    classDef backend fill:#fff3e0,stroke:#f57c00,stroke-width:2px;
+    classDef db fill:#fce4ec,stroke:#c2185b,stroke-width:2px;
+    classDef ai fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
+
+    Client(["👤 User / Client Browser"]):::user
+
+    subgraph "Frontend Application (React / Vite)"
+        UI["UI Components (Tailwind)"]:::frontend
+        State["State Management"]:::frontend
+        AIClient["AI Fallback Client"]:::frontend
     end
-    
-    subgraph Authentication & Data Layer
-        UI -->|"Google Sign-In"| FirebaseAuth["Firebase Authentication"]
-        UI -->|"CRUD Operations"| Firestore[("Firebase Firestore")]
+
+    subgraph "Firebase Cloud Infrastructure"
+        Auth["Google Authentication"]:::db
+        Firestore[("Firestore (NoSQL Database)")]:::db
+        Rules{"Security Rules"}:::db
     end
-    
-    subgraph AI Processing Layer
-        UI -->|"API Requests"| API{"AI API Routing"}
-        API -->|"Node.js Env"| Express["Express.js Backend API"]
-        API -->|"Static Env (Netlify)"| Fallback["Client-Side Fallback"]
-        Express -->|"Prompt"| Gemini["Google Gemini API"]
-        Fallback -->|"Prompt"| Gemini
+
+    subgraph "Backend API (Express.js)"
+        Server["Express API Server"]:::backend
+        AIHandler["AI Integration Service"]:::backend
     end
+
+    subgraph "External AI Services"
+        Gemini["Google Gemini 2.5 Flash"]:::ai
+    end
+
+    %% Relationships
+    Client -->|"Interacts with"| UI
+    UI <-->|"Updates"| State
+
+    %% Auth & DB
+    UI -->|"Authenticates"| Auth
+    UI -->|"Queries/Mutates Data"| Rules
+    Rules -->|"Authorized CRUD"| Firestore
+
+    %% API & AI Routing
+    UI -->|"Requests AI Actions (Proxy)"| Server
+    UI -.->|"Static Hosting Fallback"| AIClient
+
+    %% Backend Flow
+    Server -->|Routes to| AIHandler
+    AIHandler -->|"Secure Prompting"| Gemini
+    AIClient -.->|"Direct Prompting (Netlify)"| Gemini
 ```
 
 ### Low-Level Design (Working Workflows)
