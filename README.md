@@ -1,10 +1,10 @@
-# FlowPilot AI
+# MS FlowPilot AI
 
 ## Project Description
-FlowPilot AI is a team productivity operating system that transforms chaotic meetings into structured tasks automatically. It serves as an intelligent knowledge base that remembers past meetings, extracts action items, prioritizes tasks, and generates daily standup updates. By leveraging Gemini AI and Firebase, FlowPilot AI streamlines project management and keeps your team aligned without the manual overhead.
+MS FlowPilot AI is a team productivity operating system that transforms chaotic meetings into structured tasks automatically. It serves as an intelligent knowledge base that remembers past meetings, extracts action items, prioritizes tasks, and generates daily standup updates. By leveraging Gemini AI and Firebase, MS FlowPilot AI streamlines project management and keeps your team aligned without the manual overhead.
 
 ## Architecture Overview
-FlowPilot AI is designed with a modern React frontend and a flexible API architecture that can run either on a dedicated backend server or as a fully client-side application (useful for static hosting platforms like Netlify).
+MS FlowPilot AI is designed with a modern React frontend and a flexible API architecture that can run either on a dedicated backend server or as a fully client-side application (useful for static hosting platforms like Netlify).
 
 - **Frontend**: Built with React, Vite, and Tailwind CSS. It uses React Router for navigation and Framer Motion for smooth animations.
 - **Backend / AI Integration**: Uses an Express.js backend (when self-hosted) to securely communicate with the Gemini API to extract tasks, summarize meetings, and answer queries. For static deployments (e.g., Netlify), it automatically falls back to client-side API requests.

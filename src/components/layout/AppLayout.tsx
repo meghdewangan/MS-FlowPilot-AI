@@ -43,7 +43,7 @@ export function AppLayout() {
           <Sparkles className="w-10 h-10 text-white" />
         </div>
         <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-500 mb-6 text-center">
-          FlowPilot AI
+          MS FlowPilot AI
         </h1>
         <p className="text-lg text-slate-400 mb-10 max-w-lg text-center leading-relaxed">
           The team productivity operating system. Turn chaotic meetings into structured tasks, automatically.
@@ -66,7 +66,7 @@ export function AppLayout() {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-500 to-violet-500 flex items-center justify-center">
             <Sparkles className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-xl tracking-tight">FlowPilot</span>
+          <span className="font-bold text-xl tracking-tight">MS FlowPilot</span>
         </div>
         
         <nav className="flex-1 px-4 py-6 space-y-1">

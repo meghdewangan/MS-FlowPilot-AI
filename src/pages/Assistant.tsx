@@ -9,7 +9,7 @@ import Markdown from "react-markdown";
 export function Assistant() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hi! I am FlowPilot AI. I remember everything from your team's past meetings. Ask me what we discussed last week, what your urgent tasks are, or who is responsible for a project." }
+    { role: "assistant", text: "Hi! I am MS FlowPilot AI. I remember everything from your team's past meetings. Ask me what we discussed last week, what your urgent tasks are, or who is responsible for a project." }
   ]);
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -69,7 +69,7 @@ export function Assistant() {
           <Sparkles className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h2 className="font-semibold text-white">FlowPilot Knowledge Base</h2>
+          <h2 className="font-semibold text-white">MS FlowPilot Knowledge Base</h2>
           <p className="text-xs text-blue-400">Powered by Gemini AI</p>
         </div>
       </div>

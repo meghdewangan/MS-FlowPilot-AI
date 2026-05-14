@@ -122,7 +122,7 @@ async function startServer() {
         model: 'gemini-3-flash-preview',
         contents: `Based on the following meeting summaries and tasks context:\n${pastContext}\n\nAnswer this user query: ${query}`,
         config: {
-          systemInstruction: 'You are FlowPilot AI, a team operating system. Be helpful, concise, and refer strictly to the given context.'
+          systemInstruction: 'You are MS FlowPilot AI, a team operating system. Be helpful, concise, and refer strictly to the given context.'
         }
       });
       res.json({ text: response.text });
