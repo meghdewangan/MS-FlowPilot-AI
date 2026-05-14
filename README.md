@@ -13,23 +13,23 @@ FlowPilot AI is designed with a modern React frontend and a flexible API archite
 ### High-Level Design (System Architecture)
 ```mermaid
 graph TD
-    User([User]) -->|Interacts with| UI[React Frontend (Vite + Tailwind)]
+    User(["User"]) -->|"Interacts with"| UI["React Frontend (Vite + Tailwind)"]
     
     subgraph Frontend Layer
         UI
     end
     
     subgraph Authentication & Data Layer
-        UI -->|Google Sign-In| FirebaseAuth[Firebase Authentication]
-        UI -->|CRUD Operations| Firestore[(Firebase Firestore)]
+        UI -->|"Google Sign-In"| FirebaseAuth["Firebase Authentication"]
+        UI -->|"CRUD Operations"| Firestore[("Firebase Firestore")]
     end
     
     subgraph AI Processing Layer
-        UI -->|API Requests| API{AI API Routing}
-        API -->|Node.js Env| Express[Express.js Backend /api/*]
-        API -->|Static Env (Netlify)| Fallback[Client-Side Fallback]
-        Express -->|Prompt| Gemini[Google Gemini API]
-        Fallback -->|Prompt| Gemini
+        UI -->|"API Requests"| API{"AI API Routing"}
+        API -->|"Node.js Env"| Express["Express.js Backend API"]
+        API -->|"Static Env (Netlify)"| Fallback["Client-Side Fallback"]
+        Express -->|"Prompt"| Gemini["Google Gemini API"]
+        Fallback -->|"Prompt"| Gemini
     end
 ```
 
