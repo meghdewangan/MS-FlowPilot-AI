@@ -56,7 +56,11 @@ export function Assistant() {
       setMessages(prev => [...prev, { role: "assistant", text: answer || "I couldn't find an answer." }]);
     } catch (err: any) {
       console.error(err);
-      setMessages(prev => [...prev, { role: "assistant", text: `Oops, an error occurred: ${err.message}. If you deployed this app to Netlify, keep in mind Netlify only hosts the frontend by default, so the backend API is missing!` }]);
+      let errMsg = err.message || "An unknown error occurred.";
+      if (!errMsg.includes("429")) {
+         errMsg += " If you deployed this app to Netlify, keep in mind Netlify only hosts the frontend by default, so the backend API is missing!";
+      }
+      setMessages(prev => [...prev, { role: "assistant", text: `Oops, an error occurred: ${errMsg}` }]);
     } finally {
       setLoading(false);
     }

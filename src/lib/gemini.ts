@@ -32,6 +32,9 @@ async function fetchClientSide(path: string, body: any) {
   if (!response.ok) {
      const text = await response.text();
      console.error("Gemini API Error", text);
+     if (response.status === 429) {
+         throw new Error("429 Too Many Requests: You have hit the Gemini API rate limit. Please wait a moment and try again.");
+     }
      throw new Error(`Gemini API Error: ${response.status}`);
   }
 
