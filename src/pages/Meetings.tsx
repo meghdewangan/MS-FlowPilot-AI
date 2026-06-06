@@ -86,14 +86,15 @@ export function Meetings() {
     } else if (file.name.endsWith('.docx') || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
         setIsProcessing(true);
         try {
-          const mammoth = await import('mammoth');
+          const mammothModule = await import('mammoth/mammoth.browser.js');
+          const mammoth = mammothModule.default || mammothModule;
           const arrayBuffer = await file.arrayBuffer();
           const result = await mammoth.extractRawText({ arrayBuffer });
           setTranscript(result.value);
           setUploadedFileName(file.name);
-        } catch(error) {
+        } catch(error: any) {
           console.error(error);
-          alert("Error extracting text from DOCX.");
+          alert("Error extracting text from DOCX: " + (error.message || error));
         } finally {
           setIsProcessing(false);
         }
