@@ -114,6 +114,8 @@ export function Meetings() {
     
     try {
       const summaryResult = await summarizeMeeting(transcript);
+      // Wait 3.5 seconds stringently to avoid free tier rate limit burst
+      await new Promise(resolve => setTimeout(resolve, 3500));
       const tasksResult = await extractTasks(transcript);
 
       const meetingId = uuidv4();
@@ -151,9 +153,10 @@ export function Meetings() {
       setTranscript("");
       setUploadedFileName("");
       await fetchMeetings();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("Failed to process meeting. Make sure the transcript has enough context.");
+      const msg = error.message || "Failed to process meeting. Make sure the transcript has enough context.";
+      alert(`Error: ${msg}`);
     } finally {
       setIsProcessing(false);
     }

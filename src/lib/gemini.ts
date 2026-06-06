@@ -21,13 +21,25 @@ async function fetchClientSide(path: string, body: any) {
      prompt = `Analyze these tasks and order them from most critical to least critical (Respond with JSON array containing objects with title, reasoning, suggestedPriority):\n\n${body.tasksChunk}`;
   }
 
-  const response = await fetch(baseUrl, {
+  let response = await fetch(baseUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
     })
   });
+
+  if (response.status === 429) {
+     console.warn("Rate limited (429). Waiting 3 seconds before retrying...");
+     await new Promise(r => setTimeout(r, 3000));
+     response = await fetch(baseUrl, {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({
+         contents: [{ parts: [{ text: prompt }] }],
+       })
+     });
+  }
 
   if (!response.ok) {
      const text = await response.text();
